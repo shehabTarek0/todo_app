@@ -27,10 +27,14 @@ Widget defaultButton(
     );
 
 Widget defaultTextFormField(
-        {required String text,
-        required TextEditingController controller,
+        {required TextEditingController controller,
         required TextInputType inputType,
         required FormFieldValidator validator,
+        String? text,
+        String? labelText,
+        GestureTapCallback? tap,
+        int? numOfLines,
+        InputBorder? border,
         Icon? prefix,
         Icon? suffix,
         VoidCallback? onPressedSuffix,
@@ -39,15 +43,18 @@ Widget defaultTextFormField(
         bool isPassword = false}) =>
     TextFormField(
         onFieldSubmitted: submit,
+        onTap: tap,
         enabled: enabel,
         controller: controller,
         keyboardType: inputType,
         validator: validator,
         obscureText: isPassword,
+        maxLines: numOfLines,
         decoration: InputDecoration(
-          hintText: text,
-          suffixIcon: suffix != null
-              ? IconButton(onPressed: onPressedSuffix, icon: suffix)
-              : null,
-          prefixIcon: prefix,
-        ));
+            hintText: text,
+            labelText: labelText,
+            suffixIcon: suffix != null
+                ? IconButton(onPressed: onPressedSuffix, icon: suffix)
+                : null,
+            prefixIcon: prefix,
+            border: border));
